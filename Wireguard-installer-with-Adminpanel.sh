@@ -136,19 +136,19 @@ function installWireGuard() {
 		if [[ ${BOT_AUTO_INSTALL} == '1' ]]; then
 			apt-get install unzip
 			apt-get install python3-pip -y
-			wget https://github.com/Obi0Wan0Kenobi/ObiVpn/archive/refs/heads/master.zip
+			wget https://github.com/Mogerto/vpnforpay/archive/refs/heads/master.zip
 			unzip master.zip
 			rm master.zip
-			pip install -r "$(pwd)/ObiVpn-master/requirements.txt"
+			pip install -r "$(pwd)/vpnforpay-master/requirements.txt"
 			echo "{
 \"admin_tg_id\": ${ADMIN_ID_BOT},
-\"one_month_cost\": 120,
+\"one_month_cost\": 100,
 \"trial_period\": 2700,
 \"UTC_time\": 3,
 \"tg_token\": \"${API_TOKEN_BOT}\",
 \"tg_shop_token\": \"${API_PAYMENT_BOT}\"
-}" >"$(pwd)/ObiVpn-master/config.json"
-			chmod 744 -R $(pwd)/ObiVpn-master/
+}" >"$(pwd)/vpnforpay-master/config.json"
+			chmod 744 -R $(pwd)/vpnforpay-master/
 			echo "[Unit]
 Description=Admin Bot for Wireguard
 After=multi-user.target
@@ -157,8 +157,8 @@ After=multi-user.target
 Type=simple
 Restart=always
 RestartSec=15
-WorkingDirectory=$(pwd)/ObiVpn-master
-ExecStart=/usr/bin/python3 $(pwd)/ObiVpn-master/main.py
+WorkingDirectory=$(pwd)/vpnforpay-master
+ExecStart=/usr/bin/python3 $(pwd)/vpnforpay-master/main.py
 User=root
 
 [Install]
